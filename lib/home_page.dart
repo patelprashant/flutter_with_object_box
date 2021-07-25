@@ -79,6 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   }
 
                   return OrderTable(
+                    custStore: _store,
                     custOrders: snapshot.data!,
                     onSort: (colIndex, acs) {
                       final sortQuery = _store.box<CustOrder>().query();

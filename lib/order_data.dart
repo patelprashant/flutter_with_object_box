@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_with_object_box/entities.dart';
+import 'package:flutter_with_object_box/objectbox.g.dart';
+import 'package:objectbox/objectbox.dart';
 
 class OrderTable extends StatefulWidget {
   final List<CustOrder> custOrders;
   final void Function(int colIndex, bool acs) onSort;
-  const OrderTable({Key? key, required this.onSort, required this.custOrders})
+  final Store custStore;
+  const OrderTable(
+      {Key? key,
+      required this.onSort,
+      required this.custOrders,
+      required this.custStore})
       : super(key: key);
 
   @override
@@ -58,7 +65,7 @@ class _OrderTableState extends State<OrderTable> {
                   DataCell(
                     Icon(Icons.delete),
                     onTap: () {
-                      //TODO: delete order
+                      widget.custStore.box<CustOrder>().remove(order.id);
                     },
                   ),
                 ],
