@@ -81,7 +81,18 @@ class _MyHomePageState extends State<MyHomePage> {
                   return OrderTable(
                     custOrders: snapshot.data!,
                     onSort: (colIndex, acs) {
-                      //TODO: query the database and sort
+                      final sortQuery = _store.box<CustOrder>().query();
+                      final sortField =
+                          colIndex == 0 ? CustOrder_.id : CustOrder_.price;
+
+                      sortQuery.order(sortField,
+                          flags: acs ? 0 : Order.descending);
+
+                      setState(() {
+                        _custOrderStream = sortQuery
+                            .watch(triggerImmediately: true)
+                            .map((query) => query.find());
+                      });
                     },
                   );
                 }));
