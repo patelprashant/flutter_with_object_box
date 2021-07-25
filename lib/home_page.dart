@@ -23,6 +23,7 @@ class _MyHomePageState extends State<MyHomePage> {
   bool hasInitialised = false;
 
   late CustomerData _customerData;
+  late Stream<List<CustOrder>> _custOrderStream;
 
   @override
   void initState() {
@@ -35,6 +36,12 @@ class _MyHomePageState extends State<MyHomePage> {
       );
 
       setState(() {
+        _custOrderStream = _store
+            .box<CustOrder>()
+            .query()
+            .watch(triggerImmediately: true)
+            .map((query) => query.find());
+
         hasInitialised = true;
       });
     });
@@ -62,11 +69,22 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ],
         ),
-        body: OrderTable(
-          onSort: (colIndex, acs) {
-            //TODO: query the database and sort
-          },
-        ));
+        body: !hasInitialised
+            ? Center(child: CircularProgressIndicator())
+            : StreamBuilder<List<CustOrder>>(
+                stream: _custOrderStream,
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) {
+                    return Center(child: CircularProgressIndicator());
+                  }
+
+                  return OrderTable(
+                    custOrders: snapshot.data!,
+                    onSort: (colIndex, acs) {
+                      //TODO: query the database and sort
+                    },
+                  );
+                }));
   }
 
   void setNewCustomer() {

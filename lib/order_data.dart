@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_with_object_box/entities.dart';
 
 class OrderTable extends StatefulWidget {
+  final List<CustOrder> custOrders;
   final void Function(int colIndex, bool acs) onSort;
-  const OrderTable({Key? key, required this.onSort}) : super(key: key);
+  const OrderTable({Key? key, required this.onSort, required this.custOrders})
+      : super(key: key);
 
   @override
   _OrderTableState createState() => _OrderTableState();
@@ -36,30 +39,32 @@ class _OrderTableState extends State<OrderTable> {
               label: Container(),
             ),
           ],
-          rows: [
-            DataRow(
-              cells: [
-                DataCell(
-                  Text('ID'),
-                ),
-                DataCell(
-                  Text('CUSTOMER NAME'),
-                  onTap: () {
-                    //TODO: show order for this customer
-                  },
-                ),
-                DataCell(
-                  Text('\$PRICE'),
-                ),
-                DataCell(
-                  Icon(Icons.delete),
-                  onTap: () {
-                    //TODO: delete order
-                  },
-                ),
-              ],
-            )
-          ],
+          rows: widget.custOrders.map(
+            (order) {
+              return DataRow(
+                cells: [
+                  DataCell(
+                    Text(order.id.toString()),
+                  ),
+                  DataCell(
+                    Text(order.customer.target?.name ?? 'NONE'),
+                    onTap: () {
+                      //TODO: show order for this customer
+                    },
+                  ),
+                  DataCell(
+                    Text('\$${order.price}'),
+                  ),
+                  DataCell(
+                    Icon(Icons.delete),
+                    onTap: () {
+                      //TODO: delete order
+                    },
+                  ),
+                ],
+              );
+            },
+          ).toList(),
         ),
       ),
     );
