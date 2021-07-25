@@ -56,7 +56,20 @@ class _OrderTableState extends State<OrderTable> {
                   DataCell(
                     Text(order.customer.target?.name ?? 'NONE'),
                     onTap: () {
-                      //TODO: show order for this customer
+                      showModalBottomSheet(
+                          context: context,
+                          builder: (context) {
+                            return Material(
+                              child: ListView(
+                                children: order.customer.target!.myOrders
+                                    .map((o) => ListTile(
+                                          title: Text(
+                                              '${o.id} - ${o.customer.target?.name} - \$${o.price}'),
+                                        ))
+                                    .toList(),
+                              ),
+                            );
+                          });
                     },
                   ),
                   DataCell(
