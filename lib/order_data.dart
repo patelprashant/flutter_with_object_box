@@ -22,7 +22,7 @@ class _OrderTableState extends State<OrderTable> {
           sortAscending: _sortAsc,
           columns: [
             DataColumn(
-              label: Text('Number'),
+              label: Text('ID'),
               onSort: _onDataColSort,
             ),
             DataColumn(

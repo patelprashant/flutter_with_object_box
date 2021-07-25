@@ -1,0 +1,79 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "4:7864804749601222097",
+      "lastPropertyId": "3:4502924426839899382",
+      "name": "CustOrder",
+      "properties": [
+        {
+          "id": "1:8197925182676074907",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:4669257810530026251",
+          "name": "price",
+          "type": 6
+        },
+        {
+          "id": "3:4502924426839899382",
+          "name": "customerId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "3:5794602771328143356",
+          "relationTarget": "CustomerData"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "5:1483806646606077059",
+      "lastPropertyId": "2:7166746902445746938",
+      "name": "CustomerData",
+      "properties": [
+        {
+          "id": "1:8900236277176129925",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:7166746902445746938",
+          "name": "name",
+          "type": 9
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "5:1483806646606077059",
+  "lastIndexId": "3:5794602771328143356",
+  "lastRelationId": "1:8294792334049228792",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [
+    48251518754639278,
+    2543959997680869397,
+    3716535700009853182
+  ],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [
+    4229395715891323395,
+    514521459264508458,
+    352980878425082787,
+    7385240777353982003,
+    6166264215138849835,
+    4791429457269144614,
+    6080674306911615307,
+    5681853799522434576
+  ],
+  "retiredRelationUids": [
+    8294792334049228792
+  ],
+  "version": 1
+}
